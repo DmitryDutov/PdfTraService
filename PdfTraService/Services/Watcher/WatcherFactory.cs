@@ -57,7 +57,12 @@ namespace PdfTraService.Services.Watcher
 
         private async Task RunInstance(CancellationToken cancel)
         {
+            string name   = string.Empty;
+            string current= string.Empty;
+            string target = string.Empty;
 
+            var watcher = new Models.Watcher(name, current, target);
+            watcher.WacthFile();
         }
     }
 }
