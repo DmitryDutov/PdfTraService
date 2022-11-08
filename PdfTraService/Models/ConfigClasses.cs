@@ -60,7 +60,7 @@ namespace PdfTraService.Models
     {
         public Serilog Serilog { get; set; }
         public string MainPath { get; set; }
-        public IList<Inform> InformList { get; set; }
+        public List<Inform> InformList { get; set; }
     }
 
 

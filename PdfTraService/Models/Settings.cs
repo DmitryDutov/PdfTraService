@@ -59,7 +59,7 @@ namespace PdfTraService.Models
             try
             {
                 var settings = JsonConvert.DeserializeObject<Rootobject>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "config.json")));
-                listSettings = (List<Inform>)settings.InformList;
+                listSettings = settings.InformList;
 
                 Log.Warning($"Настройки по стандартному пути прочитаны (сервис Settings)");
             }
@@ -113,7 +113,7 @@ namespace PdfTraService.Models
             try
             {
                 var getSettings = JsonConvert.DeserializeObject<Rootobject>(File.ReadAllText(loadPath));
-                listSettings = (List<Inform>)getSettings.InformList;
+                listSettings = getSettings.InformList;
                 Log.Information($"Настройки из файла {loadPath} прочитаны");
             }
             catch (Exception e)

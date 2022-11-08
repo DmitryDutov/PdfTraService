@@ -34,7 +34,7 @@ namespace PdfTraService.Models
             Log.Information($"Watcher {Name} переместил файл в {targetDir}");
         }
 
-        public void WacthFile()
+        public void WatchFile()
         {
             Log.Information($"Watcher {Name} - запущен");
             using var watcher = new FileSystemWatcher(Current);
@@ -76,7 +76,7 @@ namespace PdfTraService.Models
         private static void OnCreated(object sender, FileSystemEventArgs e)
         {
             string value = $"Created: {e.FullPath}";
-            Console.WriteLine(value);
+            Log.Information(value);
             Task.Run(() =>
             {
                 MoveFile(e.FullPath);
@@ -84,13 +84,13 @@ namespace PdfTraService.Models
         }
 
         private static void OnDeleted(object sender, FileSystemEventArgs e) =>
-            Console.WriteLine($"Deleted: {e.FullPath}");
+            Log.Information($"Deleted: {e.FullPath}");
 
         private static void OnRenamed(object sender, RenamedEventArgs e)
         {
-            Console.WriteLine($"Renamed:");
-            Console.WriteLine($"    Old: {e.OldFullPath}");
-            Console.WriteLine($"    New: {e.FullPath}");
+            Log.Information($"Renamed:");
+            Log.Information($"    Old: {e.OldFullPath}");
+            Log.Information($"    New: {e.FullPath}");
             Task.Run(() =>
             {
                 MoveFile(e.FullPath);
@@ -104,10 +104,9 @@ namespace PdfTraService.Models
         {
             if (ex != null)
             {
-                Console.WriteLine($"Message: {ex.Message}");
-                Console.WriteLine("Stacktrace:");
-                Console.WriteLine(ex.StackTrace);
-                Console.WriteLine();
+                Log.Information($"Message: {ex.Message}");
+                Log.Information("Stacktrace:");
+                Log.Information(ex.StackTrace);
                 PrintException(ex.InnerException);
             }
         }

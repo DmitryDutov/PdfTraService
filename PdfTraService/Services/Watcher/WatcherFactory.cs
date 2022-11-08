@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
@@ -19,12 +20,13 @@ namespace PdfTraService.Services.Watcher
 
         public void StartWatchers(CancellationToken cancel)
         {
-            var eqpSettings = Settings.CurrentSettings;
+            var settings = Settings.CurrentSettings;
+            var mainPath = Settings.MainPath;
 
             try
             {
-                Log.Warning("Пытаюсь активировать слушатели согласно файла настроек (сервис ListenerFactory)");
-                foreach (var item in eqpSettings)
+                Log.Information("Пытаюсь активировать экземпляры Wather'ов");
+                foreach (var item in settings)
                 {
                     if (item.Active)
                     {
@@ -34,25 +36,25 @@ namespace PdfTraService.Services.Watcher
                             await RunInstance(
                                 cancel ,
                                 item.Name,
-                                item.Current,
+                                Path.Combine(mainPath, item.Current),
                                 item.Target,
                                 item.Filter
                                 );
                         }).Start();
                     }
                 }
-                Log.Warning("Слушатели успешно активированы");
+                Log.Information("Экземпляры активированы");
             }
             catch (Exception e)
             {
-                Log.Error($"Ошибка активации слушателей: {e.Message}");
+                Log.Error($"Ошибка активации экземпляров: {e.Message}");
             }
         }
 
         private async Task RunInstance(CancellationToken cancel, string name, string current, string target, string filter)
         {
             var watcher = new Models.Watcher(name, current, target, filter);
-            watcher.WacthFile();
+            watcher.WatchFile();
         }
     }
 }
