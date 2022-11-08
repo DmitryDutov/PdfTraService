@@ -32,14 +32,11 @@ namespace PdfTraService.Services.Watcher
                         new Thread(async () =>
                         {
                             await RunInstance(
-                                cancel
-                                //, 
-                                //item.Address, 
-                                //item.Port, 
-                                //item.EqpGuid, 
-                                //item.Name, 
-                                //item.Path,
-                                //item.Encoding
+                                cancel ,
+                                item.Name,
+                                item.Current,
+                                item.Target,
+                                item.Filter
                                 );
                         }).Start();
                     }
@@ -52,13 +49,9 @@ namespace PdfTraService.Services.Watcher
             }
         }
 
-        private async Task RunInstance(CancellationToken cancel)
+        private async Task RunInstance(CancellationToken cancel, string name, string current, string target, string filter)
         {
-            string name   = string.Empty;
-            string current= string.Empty;
-            string target = string.Empty;
-
-            var watcher = new Models.Watcher(name, current, target);
+            var watcher = new Models.Watcher(name, current, target, filter);
             watcher.WacthFile();
         }
     }

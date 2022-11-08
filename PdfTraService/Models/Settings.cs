@@ -12,11 +12,11 @@ namespace PdfTraService.Models
     public class Settings
     {
         private static volatile Settings _instance;
-        private readonly List<Eqp> _currentSettings;
+        private readonly List<Inform> _currentSettings;
         private readonly string _mainPath;
 
         //Создаём публичные поля, которые будут считываться в качестве настроек
-        public static List<Eqp> CurrentSettings => _instance._currentSettings;
+        public static List<Inform> CurrentSettings => _instance._currentSettings;
         public static string MainPath => _instance._mainPath;
 
         public static void Init()
@@ -51,15 +51,15 @@ namespace PdfTraService.Models
         }
 
         //Получаем настройки из файла
-        private static List<Eqp> GetSettings()
+        private static List<Inform> GetSettings()
         {
             Log.Warning("Пытаюсь прочитать настройки по стандартному пути (сервис Settings)");
-            var listEqp = new List<Eqp>();
+            var listSettings = new List<Inform>();
 
             try
             {
-                var settings = JsonConvert.DeserializeObject<Rootobject>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "config.json"))); //todo: Какой путь тут должен быть, если настройки можно будет получать из разных мест?
-                listEqp = settings.Eqps;
+                var settings = JsonConvert.DeserializeObject<Rootobject>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "config.json")));
+                listSettings = (List<Inform>)settings.InformList;
 
                 Log.Warning($"Настройки по стандартному пути прочитаны (сервис Settings)");
             }
@@ -67,7 +67,7 @@ namespace PdfTraService.Models
             {
                 Log.Error($"Ошибка чтения настроек по стандартному пути (сервис Settings): {e.Message}");
             }
-            return listEqp;
+            return listSettings;
         }
 
         private static string GetMainPath()
@@ -107,13 +107,13 @@ namespace PdfTraService.Models
                 Log.Error($"{e.Message}");
             }
         }
-        public static List<Eqp> LoadSettings(string loadPath)
+        public static List<Inform> LoadSettings(string loadPath)
         {
-            var settings = new List<Eqp>();
+            var listSettings = new List<Inform>();
             try
             {
                 var getSettings = JsonConvert.DeserializeObject<Rootobject>(File.ReadAllText(loadPath));
-                settings = getSettings.Eqps;
+                listSettings = (List<Inform>)getSettings.InformList;
                 Log.Information($"Настройки из файла {loadPath} прочитаны");
             }
             catch (Exception e)
@@ -121,7 +121,7 @@ namespace PdfTraService.Models
                 Log.Error($"Ошибка чтения настроек по пути {loadPath} (сервис Settings): {e.Message}");
             }
 
-            return settings;
+            return listSettings;
         }
         public static string LoadMainPath(string loadPath)
         {

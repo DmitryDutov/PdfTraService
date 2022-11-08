@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using Serilog;
 
 namespace PdfTraService.Models
 {
@@ -13,25 +14,29 @@ namespace PdfTraService.Models
         public static string Current => _current;
         private static string _target;
         public static string Target => _target;
+        private static string _filter;
+        public static string Filter => _filter;
 
-        public Watcher(string name, string current, string target)
+        public Watcher(string name, string current, string target, string filter)
         {
             _name = name;
             _current = current;
             _target = target;
+            _filter = filter;
         }
-        private static async Task MoveFile(string currentDir)
+        private static async Task MoveFile(string currentFilePath)
         {
-            var name = Path.GetFileName(currentDir);
-
+            var name = Path.GetFileName(currentFilePath);
             var targetDir = $"{Target}{name}";
-            File.Move(currentDir, targetDir);
 
-            Console.ReadLine();
+            File.Move(currentFilePath, targetDir);
+
+            Log.Information($"Watcher {Name} переместил файл в {targetDir}");
         }
 
         public void WacthFile()
         {
+            Log.Information($"Watcher {Name} - запущен");
             using var watcher = new FileSystemWatcher(Current);
 
             watcher.NotifyFilter = NotifyFilters.Attributes
@@ -49,7 +54,7 @@ namespace PdfTraService.Models
             watcher.Renamed += OnRenamed;
             watcher.Error += OnError;
 
-            watcher.Filter = "*.txt";
+            watcher.Filter = Filter;
             watcher.EnableRaisingEvents = true;
 
             Console.ReadLine();
@@ -61,7 +66,7 @@ namespace PdfTraService.Models
             {
                 return;
             }
-            Console.WriteLine($"Changed: {e.FullPath}");
+            Log.Information($"Changed: {e.FullPath}");
             Task.Run(() =>
             {
                 MoveFile(e.FullPath);

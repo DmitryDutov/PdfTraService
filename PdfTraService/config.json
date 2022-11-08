@@ -31,100 +31,15 @@
       "Application": "sampleapp"
     }
   },
-  "MainPath": "C:\\Test\\Severstal.DeviceMonitoring\\",
-  "Eqps": [
+  "MainPath": "C:\\Test\\",
+  "Inform": [
     {
-      "Name": "TestEQP",
-      "EqpGuid": "00000000-0000-0000-0000-000000000001",
-      "Path": "TestEQP.txt",
-      "Address": "127.0.0.2",
-      "Port": 8890,
-      "Active": "true",
-      "Encoding": "iso-8859-1"
-    },
-    {
-      "Name": "LocalEQP",
-      "EqpGuid": "00000000-0000-0000-0000-000000000002",
-      "Path": "LocalEQP.txt",
-      "Address": "127.0.0.2",
-      "Port": 8888,
-      "Active": "false",
-      "Encoding": "iso-8859-1"
-    },
-    {
-      "Name": "ARL9900_n37",
-      "EqpGuid": "00000000-0000-0000-0000-000000000003",
-      "Path": "ARL_9900_n37\\ARL9900_n37.txt",
-      "Address": "10.99.0.18",
-      "Port": 9130,
-      "Active": "false",
-      "Encoding": "iso-8859-1"
-    },
-    {
-      "Name": "ARL9900_n409",
-      "EqpGuid": "00000000-0000-0000-0000-000000000004",
-      "Path": "ARL_9900_n409\\ARL9900_n409.txt",
-      "Address": "10.99.0.18",
-      "Port": 9126,
-      "Active": "false",
-      "Encoding": "iso-8859-1"
-    },
-    {
-      "Name": "ARL9900_n738",
-      "EqpGuid": "00000000-0000-0000-0000-000000000005",
-      "Path": "ARL_9900_n738\\ARL9900_n738.txt",
-      "Address": "10.99.0.18",
-      "Port": 9170,
-      "Active": "false",
-      "Encoding": "iso-8859-1"
-    },
-    {
-      "Name": "ARL9900_n840",
-      "EqpGuid": "00000000-0000-0000-0000-000000000006",
-      "Path": "ARL_9900_n840\\ARL9900_n840.txt",
-      "Address": "10.99.0.18",
-      "Port": 9125,
-      "Active": "false",
-      "Encoding": "iso-8859-1"
-    },
-    {
-      "Name": "ARL8860_n1080",
-      "EqpGuid": "00000000-0000-0000-0000-000000000007",
-      "Path": "ARL8860_n1080\\ARL8860_n1080.txt",
-      "Address": "10.99.0.18",
-      "Port": 9127,
-      "Active": "false",
-      "Encoding": "iso-8859-1"
-    },
-    {
-      "Name": "GC2010Plus_n12095100214",
-      "EqpGuid": "00000000-0000-0000-0000-000000000010",
-      "Path": "GC-2010_Plus_nC12095100214\\GC2010Plus_n12095100214.txt",
-      "Address": "10.99.0.18",
-      "Port": 9102,
-      "Active": "false",
-      "Encoding": "iso-8859-1"
-    },
-    {
-      "Name": "GC2014AF_n11484533028",
-      "EqpGuid": "00000000-0000-0000-0000-000000000011",
-      "Path": "GC-2014_AF_nC11484533028\\GC2014AF_n11484533028.txt",
-      "Address": "10.99.0.18",
-      "Port": 9101,
-      "Active": "false",
-      "Encoding": "iso-8859-1"
-    },
-    {
-      "Name": "ARL9900_n946_TimerParser",
-      "EqpGuid": "00000000-0000-0000-0000-000000000102",
-      "Path": "ARL9900_n946_TimerParser.txt",
-      "Address": "127.0.0.2",
-      "Port": 8888,
-      "Active": "true",
-      "Encoding": "unicode",
-      "Interval": 3,
-      "Mask": "null" 
-    }
+      "Name": "Z100n175863",
+      "Current": "F-001\\",
+      "Target": "F-002\\",
+      "Filter": "*.txt",
+      "Active": "true" 
+    } 
   ]
 }
 
