@@ -18,5 +18,5 @@ namespace PdfTraService.WindowsService
             return hostBuilder.UseServiceBaseLifetime().Build().RunAsync(cancellationToken);
         }
     }
-
 }
+
