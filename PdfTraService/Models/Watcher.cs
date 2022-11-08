@@ -12,17 +12,23 @@ namespace PdfTraService.Models
 
         private static string _current;
         public static string Current => _current;
+
         private static string _target;
         public static string Target => _target;
+
         private static string _filter;
         public static string Filter => _filter;
 
-        public Watcher(string name, string current, string target, string filter)
+        private static bool _checkFolder;
+        public static bool CheckFolder => _checkFolder;
+
+        public Watcher(string name, string current, string target, string filter, bool checkFolder)
         {
             _name = name;
             _current = current;
             _target = target;
             _filter = filter;
+            _checkFolder = checkFolder;
         }
         private static async Task MoveFile(string currentFilePath)
         {
@@ -34,8 +40,33 @@ namespace PdfTraService.Models
             Log.Information($"Watcher {Name} переместил файл в {targetDir}");
         }
 
+        private void CheckDir()
+        {
+            Log.Information($"Запускаю проверку папки {Current}");
+            var dir = Directory.GetFiles(Current);
+            if (dir.Length != 0)
+            {
+                foreach (var item in dir)
+                {
+                    if (item.Contains(Filter.Replace("*", string.Empty)))
+                    {
+                        Console.WriteLine(item);
+                        Task.Run(() =>
+                        {
+                            MoveFile(item);
+                        });
+                    }
+                }
+            }
+        }
+
         public void WatchFile()
         {
+            if (CheckFolder)
+            {
+                CheckDir();
+            }
+
             Log.Information($"Watcher {Name} - запущен");
             using var watcher = new FileSystemWatcher(Current);
 

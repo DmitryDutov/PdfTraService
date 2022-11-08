@@ -54,6 +54,7 @@ namespace PdfTraService.Models
         public string Target { get; set; }
         public string Filter { get; set; }
         public bool Active { get; set; }
+        public bool CheckFolder { get; set; }
     }
 
     public class Rootobject

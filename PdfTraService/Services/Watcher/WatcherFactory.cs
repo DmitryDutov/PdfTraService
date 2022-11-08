@@ -38,7 +38,8 @@ namespace PdfTraService.Services.Watcher
                                 item.Name,
                                 Path.Combine(mainPath, item.Current),
                                 item.Target,
-                                item.Filter
+                                item.Filter,
+                                item.CheckFolder
                                 );
                         }).Start();
                     }
@@ -51,9 +52,9 @@ namespace PdfTraService.Services.Watcher
             }
         }
 
-        private async Task RunInstance(CancellationToken cancel, string name, string current, string target, string filter)
+        private async Task RunInstance(CancellationToken cancel, string name, string current, string target, string filter, bool checkFolder)
         {
-            var watcher = new Models.Watcher(name, current, target, filter);
+            var watcher = new Models.Watcher(name, current, target, filter, checkFolder);
             watcher.WatchFile();
         }
     }

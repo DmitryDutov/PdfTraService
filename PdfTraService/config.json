@@ -38,7 +38,8 @@
       "Current": "F-001\\",
       "Target": "C:\\Test\\F-002\\",
       "Filter": "*.txt",
-      "Active": "true" 
+      "Active": "true", 
+      "CheckFolder": "true"
     } 
   ]
 }
