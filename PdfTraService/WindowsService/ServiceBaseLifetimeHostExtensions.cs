@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Severstal.LIMS.DeviceMonitoring.WindowsService
+namespace PdfTraService.WindowsService
 {
     //Сервис, настраивающий хостбилдер
     public static class ServiceBaseLifetimeHostExtensions
@@ -18,6 +18,5 @@ namespace Severstal.LIMS.DeviceMonitoring.WindowsService
             return hostBuilder.UseServiceBaseLifetime().Build().RunAsync(cancellationToken);
         }
     }
-
 
 }

@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Hosting;
-using Severstal.LIMS.DeviceMonitoring.WindowsService;
 using System;
 using System.Threading.Tasks;
+using PdfTraService.WindowsService;
 
-namespace Severstal.LIMS.DeviceMonitoring.Extensions.HostExtensions
+namespace PdfTraService.Extensions.HostExtensions
 {
     //Выбор режима запуска программы в зависимости от наличия интерактива
     public static class WindowsHostExtensions

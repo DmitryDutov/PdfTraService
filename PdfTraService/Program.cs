@@ -10,7 +10,7 @@ using PdfTraService.Services.Listener;
 using PdfTraService.Services.ParserService;
 using PdfTraService.Services.TaskQeue;
 using Serilog;
-using Severstal.LIMS.DeviceMonitoring.Extensions.HostExtensions;
+using PdfTraService.Extensions.HostExtensions;
 
 namespace PdfTraService
 {

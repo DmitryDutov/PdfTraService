@@ -4,7 +4,7 @@ using System.ServiceProcess;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Severstal.LIMS.DeviceMonitoring.WindowsService
+namespace PdfTraService.WindowsService
 {
     //Сервис, позволяющий сконфигурировать хост для универсального использования
     class ServiceBaseLifetime : ServiceBase, IHostLifetime
