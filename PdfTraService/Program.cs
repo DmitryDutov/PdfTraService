@@ -6,11 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PdfTraService.Models;
-using PdfTraService.Services.Listener;
-using PdfTraService.Services.ParserService;
-using PdfTraService.Services.TaskQeue;
 using Serilog;
 using PdfTraService.Extensions.HostExtensions;
+using PdfTraService.Services.Watcher;
 
 namespace PdfTraService
 {
@@ -41,11 +39,7 @@ namespace PdfTraService
                 {
                     Settings.Init();
                     //Регистрируем все сервисы приложения
-                    services.AddHostedService<ListenerFactory>();
-                    services.AddHostedService<ParserManager>();
-
-                    //services.AddSingleton<Settings>();
-                    services.AddSingleton<EqpQueue>();
+                    services.AddHostedService<WatcherFactory>();
                 });
 
             await builder.RunService();

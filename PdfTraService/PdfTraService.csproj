@@ -40,7 +40,6 @@
 
   <ItemGroup>
     <None Remove="config.json" />
-    <None Remove="Services\TaskQeue\EqpQueue.cs~RF2f80639.TMP" />
   </ItemGroup>
 
 
