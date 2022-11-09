@@ -40,7 +40,15 @@
       "Filter": "*.txt",
       "Active": "true", 
       "CheckFolder": "true"
-    } 
+    } ,
+    {
+      "Name": "NewWatcher",
+      "Current": "F-003\\",
+      "Target": "C:\\Test\\F-004\\",
+      "Filter": "*.txt",
+      "Active": "true", 
+      "CheckFolder": "false"
+    }
   ]
 }
 

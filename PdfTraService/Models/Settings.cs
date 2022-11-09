@@ -21,16 +21,16 @@ namespace PdfTraService.Models
 
         public static void Init()
         {
-            Log.Warning("Пытаюсь инициализировать сервис Settings");
+            Log.Information("Пытаюсь инициализировать сервис Settings");
             _instance = new Settings();
-            Log.Warning("Инициализирован сервис Settings");
+            Log.Information("Инициализирован сервис Settings");
         }
 
         public static void InitByCommand(string loadPath)
         {
-            Log.Warning("Пытаюсь инициализировать сервис Settings");
+            Log.Information("Пытаюсь инициализировать сервис Settings");
             _instance = new Settings(loadPath);
-            Log.Warning("Инициализирован сервис Settings");
+            Log.Information("Инициализирован сервис Settings");
         }
 
         public Settings()
@@ -53,7 +53,7 @@ namespace PdfTraService.Models
         //Получаем настройки из файла
         private static List<Inform> GetSettings()
         {
-            Log.Warning("Пытаюсь прочитать настройки по стандартному пути (сервис Settings)");
+            Log.Information("Пытаюсь прочитать настройки по стандартному пути (сервис Settings)");
             var listSettings = new List<Inform>();
 
             try
@@ -61,7 +61,7 @@ namespace PdfTraService.Models
                 var settings = JsonConvert.DeserializeObject<Rootobject>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "config.json")));
                 listSettings = settings.InformList;
 
-                Log.Warning($"Настройки по стандартному пути прочитаны (сервис Settings)");
+                Log.Information($"Настройки по стандартному пути прочитаны (сервис Settings)");
             }
             catch (Exception e)
             {
@@ -72,14 +72,14 @@ namespace PdfTraService.Models
 
         private static string GetMainPath()
         {
-            Log.Warning("Пытаюсь прочитать основную директорию по стандартному пути (сервис Settings)");
+            Log.Information("Пытаюсь прочитать основную директорию по стандартному пути (сервис Settings)");
             var mainPath = string.Empty;
             try
             {
                 var settings = JsonConvert.DeserializeObject<Rootobject>(File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "config.json")));
                 mainPath = settings.MainPath;
 
-                Log.Warning($"Основная директория прочитана по стандартному пути (сервис Settings)");
+                Log.Information($"Основная директория прочитана по стандартному пути (сервис Settings)");
             }
             catch (Exception e)
             {

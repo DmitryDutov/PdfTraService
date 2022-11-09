@@ -7,20 +7,20 @@ namespace PdfTraService.Models
 {
     public class Watcher
     {
-        public static string Name => _name;
-        private static string _name;
+        public string Name => _name;
+        private string _name;
 
-        private static string _current;
-        public static string Current => _current;
+        private string _current;
+        public string Current => _current;
 
-        private static string _target;
-        public static string Target => _target;
+        private string _target;
+        public string Target => _target;
 
-        private static string _filter;
-        public static string Filter => _filter;
+        private string _filter;
+        public string Filter => _filter;
 
-        private static bool _checkFolder;
-        public static bool CheckFolder => _checkFolder;
+        private bool _checkFolder;
+        public bool CheckFolder => _checkFolder;
 
         public Watcher(string name, string current, string target, string filter, bool checkFolder)
         {
@@ -30,7 +30,7 @@ namespace PdfTraService.Models
             _filter = filter;
             _checkFolder = checkFolder;
         }
-        private static async Task MoveFile(string currentFilePath)
+        private async Task MoveFile(string currentFilePath)
         {
             var name = Path.GetFileName(currentFilePath);
             var targetDir = $"{Target}{name}";
@@ -91,7 +91,7 @@ namespace PdfTraService.Models
             Console.ReadLine();
         }
 
-        private static void OnChanged(object sender, FileSystemEventArgs e)
+        private void OnChanged(object sender, FileSystemEventArgs e)
         {
             if (e.ChangeType != WatcherChangeTypes.Changed)
             {
@@ -104,7 +104,7 @@ namespace PdfTraService.Models
             });
         }
 
-        private static void OnCreated(object sender, FileSystemEventArgs e)
+        private void OnCreated(object sender, FileSystemEventArgs e)
         {
             string value = $"Created: {e.FullPath}";
             Log.Information(value);
@@ -114,10 +114,10 @@ namespace PdfTraService.Models
             });
         }
 
-        private static void OnDeleted(object sender, FileSystemEventArgs e) =>
+        private void OnDeleted(object sender, FileSystemEventArgs e) =>
             Log.Information($"Deleted: {e.FullPath}");
 
-        private static void OnRenamed(object sender, RenamedEventArgs e)
+        private void OnRenamed(object sender, RenamedEventArgs e)
         {
             Log.Information($"Renamed:");
             Log.Information($"    Old: {e.OldFullPath}");
@@ -128,10 +128,10 @@ namespace PdfTraService.Models
             });
         }
 
-        private static void OnError(object sender, ErrorEventArgs e) =>
+        private void OnError(object sender, ErrorEventArgs e) =>
             PrintException(e.GetException());
 
-        private static void PrintException(Exception? ex)
+        private void PrintException(Exception? ex)
         {
             if (ex != null)
             {
