@@ -68,27 +68,35 @@ namespace PdfTraService.Models
             }
 
             Log.Information($"Watcher {Name} - запущен");
-            using var watcher = new FileSystemWatcher(Current);
+            try
+            {
+                using var watcher = new FileSystemWatcher(Current);
 
-            watcher.NotifyFilter = NotifyFilters.Attributes
-                                 | NotifyFilters.CreationTime
-                                 | NotifyFilters.DirectoryName
-                                 | NotifyFilters.FileName
-                                 | NotifyFilters.LastAccess
-                                 | NotifyFilters.LastWrite
-                                 | NotifyFilters.Security
-                                 | NotifyFilters.Size;
+                watcher.NotifyFilter = NotifyFilters.Attributes
+                                     | NotifyFilters.CreationTime
+                                     | NotifyFilters.DirectoryName
+                                     | NotifyFilters.FileName
+                                     | NotifyFilters.LastAccess
+                                     | NotifyFilters.LastWrite
+                                     | NotifyFilters.Security
+                                     | NotifyFilters.Size;
 
-            watcher.Changed += OnChanged;
-            watcher.Created += OnCreated;
-            watcher.Deleted += OnDeleted;
-            watcher.Renamed += OnRenamed;
-            watcher.Error += OnError;
+                watcher.Changed += OnChanged;
+                watcher.Created += OnCreated;
+                watcher.Deleted += OnDeleted;
+                watcher.Renamed += OnRenamed;
+                watcher.Error += OnError;
 
-            watcher.Filter = Filter;
-            watcher.EnableRaisingEvents = true;
+                watcher.Filter = Filter;
+                watcher.EnableRaisingEvents = true;
 
-            Console.ReadLine();
+                Console.ReadLine();
+
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"{Name} ==> Ошибка указания пути: {ex.Message}");
+            }
         }
 
         private void OnChanged(object sender, FileSystemEventArgs e)
